@@ -240,6 +240,6 @@ func main() {
 
 위의 예시는 `:=` 키워드를 이용해 함수 밖에서 변수를 정의함
 
-함수 밖에서 변수를 정의했기 때문에, 에러를 발생시킴
+함수 밖에서 변수를 정의했기 때문에, 아래와 같은 에러가 발생함
 
-결과: `syntax error: non-declaration statement outside function body`
+`syntax error: non-declaration statement outside function body`
