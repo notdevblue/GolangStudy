@@ -243,3 +243,243 @@ func main() {
 함수 밖에서 변수를 정의했기 때문에, 아래와 같은 에러가 발생함
 
 `syntax error: non-declaration statement outside function body`
+
+* * *
+
+### 다중 변수 선언
+
+* Go 언어는 같은 줄에서 복수의 변수를 선언할 수 있음
+
+```go
+package main
+import ("fmt")
+
+func main() {
+    var a, b, c, d int = 1, 3, 5, 7
+
+    fmt.Println(a)
+    fmt.Println(b)
+    fmt.Println(c)
+    fmt.Println(d)
+}
+```
+
+`type` 키워드를 사용한 경우, 같은 줄에서 한개의 타입만 선언할 수 있음
+
+`type` 키워드가 없는 경우, 같은 줄에서 여러 타입을 선언할 수 있음
+
+```go
+package main
+import ("fmt")
+
+func main() {
+    var a, b = 6, "Hello"
+    c, d := 7, "World!"
+
+    fmt.Println(a)
+    fmt.Println(b)
+    fmt.Println(c)
+    fmt.Println(d)
+}
+```
+
+* * *
+
+#### 블록 안에 변수 선언
+
+* 변수의 다중 선언을 블록으로 그룹지어 가독성을 높일 수 있음
+
+```go
+package main
+import ("fmt")
+
+func main() {
+    var (
+        a int
+        b int = 1
+        c string = "Hello"
+    )
+
+    fmt.Println(a)
+    fmt.Println(b)
+    fmt.Println(c)
+}
+```
+
+* * *
+
+### 변수 명명 규칙
+
+변수는 짧은 이름 (x, y) 또는 의미가 담긴 이름 (age, price, carname 등등) 을 가질 수 있음
+
+* 변수 이름은 단어나 언더스코어 문자 (`_`) 로 시작되어야 함
+* 변수 이름은 숫자로 시작할 수 없음
+* 변수 이름은 영어 단어와 숫자, 그리고 언더스코어 문자만 들어갈 수 있음 (`a-z`, `A-Z`, `0-9`, 그리고 `_`)
+* 변수 이름은 대소문자를 구분함 (age, Age, AGE 는 각각 다른 변수)
+* 변수 이름 길이 제한은 없음
+* 변수 이름은 공백을 포함할 수 없음
+* 변수 이름은 Go 키워드일 수 없음
+
+* * *
+
+### 복수 단어 변수명
+
+여러 단어를 포함한 변수 이름은 읽기 어려울 수 있음
+
+이를 읽기 쉽게 하기 위한 여러 기술들이 존재함
+
+* * *
+
+#### camelCase
+
+첫 단어를 제외한 각각 단어의 시작은 대문자임
+
+```go
+myVariableName = "Han"
+```
+
+* * *
+
+#### PascalCase
+
+각각 단어의 시작은 대문자임
+
+```go
+MyVariableName = "Han"
+```
+
+* * *
+
+#### snake_case
+
+각각의 단어는 언더스코어 문자로 나누어짐
+
+```go
+my_variable_name = "Han"
+```
+
+* * *
+
+### 상수
+
+만약 변수가 변경할 수 없는 상수값을 가져야 한다면 `const` 키워드를 사용함
+
+`const` 키워드는 변수를 상수로 선언함. 이는 이 변수는 불변하고 읽기 전용이라는 것을 나타냄
+
+```go
+const CONSTNAME type = value
+```
+
+상수 변수는 선언 시 `value` 를 전달해 줘야 함
+
+* * *
+
+#### 상수 정의 예시
+
+```go
+package main
+import ("fmt")
+
+const PI = 3.14
+
+func main() {
+    fmt.Println(PI)
+}
+```
+
+* * *
+
+#### 상수 규칙
+
+* 상수 명명 규칙은 변수 명명 규칙과 동일함
+* 상수 이름은 모두 대문자로 작성됨 (일반 변수와 차이를 쉽게 알기 위해)
+* 상수는 함수 안과 밖에서 선언될 수 있음
+
+* * *
+
+#### 상수 타입
+
+상수에는 두가지 타입이 있음
+
+* Typed constants
+* Untyped constants
+
+* * *
+
+#### Typed Constants
+
+Typed Constants 는 정의된 타입을 이용해 정의함
+
+```go
+package main
+import ("fmt")
+
+const A int = 1
+
+func main() {
+    fmt.Println(A)
+}
+```
+
+* * *
+
+#### Untyped Contants
+
+Untyped constants 는 타입 없이 정의함
+
+```go
+package main
+import ("fmt")
+
+const A = 1
+
+func main() {
+    fmt.Println(A)
+}
+```
+
+이 상황에서는 상수의 타입은 전달된 값으로 추론됨
+
+* * *
+
+#### 상수: 불변성과 읽기 전용
+
+상수가 정의된 경우, 정의된 후 값을 변경할 수 없음
+
+```go
+package main
+import ("fmt")
+
+func main() {
+    const A = 1
+    A = 2
+    fmt.Println(A)
+}
+```
+
+위는 아레와 같은 오류를 출력함
+
+`cannot assign to A`
+
+* * *
+
+#### 다중 상수 선언
+
+* 상수의 다중 선언을 블록으로 그룹지어 가독성을 높일 수 있음
+
+```go
+package main
+import ("fmt")
+
+const (
+    A int = 1
+    B = 3.14
+    C = "Han"
+)
+
+func main() {
+    fmt.Println(A)
+    fmt.Println(B)
+    fmt.Println(C)
+}
+```
